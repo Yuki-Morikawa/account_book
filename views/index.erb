@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>account_book</title>
+  <script src="/assets/js/Chart.js"></script>
 </head>
 <body>
 
@@ -18,6 +19,32 @@
     </select>
     <input type="submit"  value="追加">
 </form>
+
+<canvas id="graph"></canvas>
+<script>
+  ctx = document.getElementByID("graph");
+  ctx.width = 500;
+  clr = ['lightsalmon', 'palegreen', 'lightskyblue', 'plum', 'silver', 'pink'];
+  var price = [], colors = [], labels = [];
+  <% @items.each_with_index do |item, idx| %>
+    price.push(<%= item.price %>);
+    labels.push('<%= item.title %>');
+    colors.push(clr[<%= idx % 6 %>]);
+  <% end %>
+  var date = {
+    labels: labels,
+    datasets:[
+      {
+        data: price,
+        backgroundColor: colors
+      }]
+  };
+  var myDoughnut = new Chart(ctx,{
+    type: 'doughnut',
+    data: data,
+    options: { responsive: false }
+  });
+</script>
 
 <ul>
   <% @categories.each do |category| %>
