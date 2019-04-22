@@ -17,12 +17,12 @@
         <option value="<%= category.id %>"><%= category.name %></option>
       <% end %>
     </select>
-    <input type="submit"  value="追加">
+    <input type="submit" value="追加">
 </form>
 
 <canvas id="graph"></canvas>
 <script>
-  ctx = document.getElementByID("graph");
+  ctx = document.getElementById("graph");
   ctx.width = 500;
   clr = ['lightsalmon', 'palegreen', 'lightskyblue', 'plum', 'silver', 'pink'];
   var price = [], colors = [], labels = [];
@@ -31,7 +31,7 @@
     labels.push('<%= item.title %>');
     colors.push(clr[<%= idx % 6 %>]);
   <% end %>
-  var date = {
+  var data = {
     labels: labels,
     datasets:[
       {
